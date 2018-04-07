@@ -16,7 +16,6 @@
         <docker.tag>latest</docker.tag>
         <name.host>localhost</name.host>
         <name.port>8082</name.port>
-        <greeting.path>/resources/greeting</greeting.path>
         <docker.push.username>arungupta</docker.push.username>
         <docker.push.password>password</docker.push.password>
         <version.fabric8.maven.plugin>3.5.30</version.fabric8.maven.plugin>
@@ -31,6 +30,8 @@
         <version.xray.sdk-core>1.2.1</version.xray.sdk-core>
         <version.jackson.core>2.9.4</version.jackson.core>
         <version.javax.inject>1</version.javax.inject>
+        <version.jackson.databind>2.8.4</version.jackson.databind>
+        <version.jackson.annotations>2.8.4</version.jackson.annotations>
     </properties>
 
     <dependencyManagement>
@@ -88,6 +89,16 @@
                 <version>${version.jackson.core}</version>
             </dependency>
             <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${version.jackson.databind}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${version.jackson.annotations}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.mashape.unirest</groupId>
                 <artifactId>unirest-java</artifactId>
                 <version>${version.unirest}</version>
@@ -135,6 +146,14 @@
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
         </dependency>
     </dependencies>
 
@@ -220,12 +239,12 @@
                     <artifactId>jersey-media-json-jackson</artifactId>
                 </dependency>
                 <dependency>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
                 </dependency>
                 <dependency>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-jdk14</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
                 </dependency>
             </dependencies>
             <build>
