@@ -7,18 +7,15 @@
     <packaging>war</packaging>
 
     <properties>
-        <fabric8.generator.name>${docker.repo}/${project.build.finalName}:${docker.tag}</fabric8.generator.name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.wildfly.swarm>2018.2.0</version.wildfly.swarm>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <docker.repo>arungupta</docker.repo>
-        <docker.tag>latest</docker.tag>
+        <docker.name>${docker.repo}/${project.build.finalName}:%l</docker.name>
         <name.host>localhost</name.host>
         <name.port>8082</name.port>
-        <docker.push.username>arungupta</docker.push.username>
-        <docker.push.password>password</docker.push.password>
-        <version.fabric8.maven.plugin>3.5.30</version.fabric8.maven.plugin>
+        <version.docker.maven.plugin>0.25.2</version.docker.maven.plugin>
         <version.shade.maven.plugin>2.3</version.shade.maven.plugin>
         <version.lambda.java.core>1.2.0</version.lambda.java.core>
         <version.shade.maven.plugin>2.3</version.shade.maven.plugin>
@@ -205,13 +202,21 @@
                     </plugin>
                     <plugin>
                         <groupId>io.fabric8</groupId>
-                        <artifactId>fabric8-maven-plugin</artifactId>
-                        <version>${version.fabric8.maven.plugin}</version>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <version>${version.docker.maven.plugin}</version>
                         <executions>
                             <execution>
+                                <id>docker:build</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>build</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>docker:push</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>push</goal>
                                 </goals>
                             </execution>
                         </executions>
